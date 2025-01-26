@@ -9,6 +9,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+type Language = 'fr' | 'en';
+
 export default defineComponent({
   name: 'App',
   data() {
@@ -22,22 +24,22 @@ export default defineComponent({
     };
   },
   methods: {
-    detectLanguage(): string {
-      const userLang = navigator.language || navigator.userLanguage;
-      return userLang.substring(0, 2);
+    detectLanguage(): Language {
+      const userLang = navigator.language || navigator.language;
+      return userLang.startsWith('fr') ? 'fr' : 'en';
     },
-    updateContent(language: string) {
-      const titles = {
+    updateContent(language: Language) {
+      const titles: Record<Language, string> = {
         fr: 'HyTools',
         en: 'HyTools',
       };
 
-      const messages = {
+      const messages: Record<Language, string> = {
         fr: 'Notre site est en cours de développement. Rejoignez notre communauté sur Discord pour rester informé.',
         en: 'Our website is under development. Join our Discord community to stay informed.',
       };
 
-      const links = {
+      const links: Record<Language, string> = {
         fr: 'Rejoignez-nous sur Discord',
         en: 'Join us on Discord',
       };
